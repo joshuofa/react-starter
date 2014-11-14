@@ -51,7 +51,6 @@ var Grid = React.createClass({
         var numCols = 50;
         return {
             currGrid: this.newGrid(numRows, numCols),
-            nextGrid: this.newGrid(numRows, numCols),
             numRows: numRows,
             numCols: numCols,
             running: false,
