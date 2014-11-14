@@ -52,13 +52,26 @@ var Grid = React.createClass({
         }
     },
 
+    clone: function(existingArray) {
+        var newObj = (existingArray instanceof Array) ? [] : {};
+        for (i in existingArray) {
+            if (i == 'clone') continue;
+            if (existingArray[i] && typeof existingArray[i] == "object") {
+                newObj[i] = this.clone(existingArray[i]);
+            } else {
+                newObj[i] = existingArray[i]
+            }
+        }
+        return newObj;
+    },
+
     onNextGen: function() {
     	//console.log("onNextGen");
         //this.setState({grid: []})
         var numRows = this.state.numRows;
         var numCols = this.state.numRows;
         var prevGrid = this.state.grid;
-        var nextGrid = this.state.grid.slice(0);
+        var nextGrid = this.clone(prevGrid);
         //this.setState({grid: this.state.grid})
         for (var i = 0; i < numRows; i++) {
             var row = [];
